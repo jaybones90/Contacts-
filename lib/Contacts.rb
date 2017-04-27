@@ -1,5 +1,5 @@
 class Contact
-
+  @@all_contacts = []
 
   attr_accessor(:first_name, :last_name, :company, :job_title)
 
@@ -13,6 +13,13 @@ class Contact
     @mailing_addresses = []
   end
 
+  define_singleton_method(:all) do
+    @@all_contacts
+  end
+
+  define_method(:save) do
+    @@all_contacts.push(self)
+  end
 end
 
 
@@ -59,3 +66,26 @@ class Number
     @@all_numbers.push(self)
   end
 end
+
+class Address
+
+  attr_accessor(:street, :city, :state, :zip, :type, :id)
+  @@all_addresses = []
+
+  define_method(:initialize) do |attributes|
+    @street = attributes.fetch(:street)
+    @city = attributes.fetch(:city)
+    @state = attributes.fetch(:state)
+    @zip = attributes.fetch(:zip)
+    @type = attributes.fetch(:type)
+    @id = @@all_addresses.length().+(1)
+  end
+
+    define_singleton_method(:all) do
+      @@all_addresses
+    end
+
+    define_method(:save) do
+      @@all_addresses.push(self)
+    end
+  end

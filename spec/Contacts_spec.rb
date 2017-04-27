@@ -32,4 +32,21 @@ describe(Contact) do
     end
   end
 
+  describe(".all") do
+    it("starts out as empty") do
+    expect(Contact.all()).to(eq([]))
+    end
+  end
+
+  describe("#save") do
+    it("saves the contact information to the all contacts array") do
+      test_contact = Contact.new({:first_name=> "Phil", :last_name=> "Knight", :company=> "Nike", :job_title=> "CEO"})
+      test_contact.save()
+      expect(Contact.all()).to(eq([test_contact]))
+    end
+  end
+
+  describe("#add_email") do
+    
+  end
 end
