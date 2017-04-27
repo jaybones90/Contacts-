@@ -20,17 +20,13 @@ post('/contact_details') do
   attributes = {:first_name=> first_name, :last_name=> last_name, :company=> company, :job_title=> job_title}
   @new_contact = Contact.new(attributes)
   @new_contact.save()
-
-  erb(:contact_info)
-end
-
-get('/contact_details') do
-
-  erb(:contact_info)
+  @all_contacts = Contact.all()
+  erb(:contact_list)
 end
 
 get('/contact_details/:id') do
-  @contact = Contact.find(params.fetch('id').to_i())
+  contact = Contact.find(params.fetch('id').to_i())
+  @new_contact = contact
   erb(:contact_info)
 end
 
